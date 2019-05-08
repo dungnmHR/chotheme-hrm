@@ -30,17 +30,17 @@ class Item extends Model
 
     public function getLinkAttribute($value)
     {
-        return 'adminDNM-2/source/themes/files'.$value;
+        return config('upload.path.public').config('upload.url.file').$value;
     }
 
     public function getImageSmallAttribute($value)
     {
-        return "adminDNM-2/source/themes/images/".$value;
+        return config('upload.path.public').config('upload.url.image').$value;
     }
 
     public function getImageBigAttribute($value)
     {
-        return "adminDNM-2/source/themes/images/".$value;
+        return config('upload.path.public').config('upload.url.image').$value;
     }
 
     public function setPriceAttribute($value)

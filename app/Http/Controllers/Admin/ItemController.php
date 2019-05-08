@@ -42,7 +42,6 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-            
             $this->validate(request(), 
                 [
                     // 'title' => 'required|unique:games',
@@ -71,8 +70,6 @@ class ItemController extends Controller
 
                 ]            
             );
-
-            $base_url_ = str_replace("public","",url('/'));
             $img = $request->imgFile;
             $nameImageFile = $img->getClientOriginalName();
             $file = $request->fileTheme;
@@ -82,16 +79,18 @@ class ItemController extends Controller
 
             $random_file_img_name = str_random(4).'_'.$nameImageFile;
             $random_file_theme_name = str_random(4).'_'.$nameThemeFile;
-            while(file_exists('./source/themes/images'.$random_file_img_name)) // Trường hợp trên gán với 4 ký tự random nhưng vẫn có thể xảy ra trường hợp bị trùng, nên bỏ vào vòng lặp while để kiểm tra với tên tất cả các file hình trong CSDL, nếu bị trùng thì sẽ random 1 tên khác đến khi nào ko trùng nữa thì thoát vòng lặp
+
+            while(file_exists(config('upload.url.image').$random_file_img_name))
             {
                 $random_file_img_name = str_random(4).'_'.$nameImageFile;
             }
-            while(file_exists('./source/themes/files'.$random_file_theme_name)) // Trường hợp trên gán với 4 ký tự random nhưng vẫn có thể xảy ra trường hợp bị trùng, nên bỏ vào vòng lặp while để kiểm tra với tên tất cả các file hình trong CSDL, nếu bị trùng thì sẽ random 1 tên khác đến khi nào ko trùng nữa thì thoát vòng lặp
+            while(file_exists(config('upload.url.file').$random_file_theme_name)) 
             {
                 $random_file_theme_name = str_random(4).'_'.$nameThemeFile;
             }
-            $img->move('./source/themes/images', $random_file_img_name);
-            $file->move('./source/themes/files', $random_file_theme_name);
+
+            $img->move(config('upload.url.image'), $random_file_img_name);
+            $file->move(config('upload.url.file'), $random_file_theme_name);
             $item = new Item();
             $item->name = $request->name;
             $item->image_small = $random_file_img_name;
@@ -105,7 +104,7 @@ class ItemController extends Controller
             $item->price = $request->price;
             $item->saleoff = $request->saleoff;
             $item->cartegory = $request->cartegory;
-            $item->user_id = "1";
+            $item->user_id = \Auth::user()->id;
             $item->status = $request->status;
             $item->save();
             return redirect()->route('list-item');;
