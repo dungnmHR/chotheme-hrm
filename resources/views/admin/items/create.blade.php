@@ -137,7 +137,8 @@ Upload theme mới
                             </div>						
 						</div>
 	                </div>
-	                 <div class="hr-line-dashed"></div>
+	                <div class="hr-line-dashed"></div>
+	                
 	                <div class="form-group {{ $errors->has('fileTheme') ? 'has-error' : '' }}">
 	                	<label class="col-sm-2 control-label">Upload file</label>
 						<div class="col-sm-10">
@@ -199,6 +200,4 @@ Upload theme mới
     });
 </script>
 <script src="{{asset('assets/js/plugins/jasny/jasny-bootstrap.min.js')}}"></script>
-
-
 @stop

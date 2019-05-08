@@ -64,6 +64,19 @@
                     <li class={{$flag == "product_n" ? "active" : ""}}><a href="{{route('create-product')}}">Thêm mới</a></li>
                 </ul>
             </li>
+            <li class={{$flag == "menu"  ? "active" : ""}}>
+                <a href="{{route('list-menu')}}">
+                    <i class="fa fa-bars"></i> <span class="nav-label">Menu</span>
+                </a>
+            </li>
+            <li class={{$flag == "banner_l" || $flag == "banner_n" ? "active" : ""}}>
+                <a href="#"><i class="fa fa-file-image-o"></i> <span class="nav-label">Banner</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class={{$flag == "banner_l" ? "active" : ""}}><a href="{{route('list-banner')}}">Danh sách banner</a></li>
+                    <li class={{$flag == "banner_n" ? "active" : ""}}><a href="{{route('create-banner')}}">Thêm mới</a></li>
+                </ul>
+            </li>
+
         </ul>
     </div>
 </nav>

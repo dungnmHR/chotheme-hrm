@@ -57,6 +57,21 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::get('/{id}/chi-tiet', '\App\Http\Controllers\Admin\TransController@show')->name('show-trans');
     });
     // END Route for transactions
+
+    // START Route for menu
+    Route::prefix('menu')->group(function () {
+        Route::get('/', '\App\Http\Controllers\Admin\MenuController@index')->name('list-menu');
+        Route::get('/test', '\App\Http\Controllers\Admin\MenuController@test')->name('list-menu');
+    });
+    // END Route for transactions
+
+    // START Route for menu
+    Route::prefix('banner')->group(function () {
+        Route::get('/list', '\App\Http\Controllers\Admin\BannerController@index')->name('list-banner');
+        Route::get('/create', '\App\Http\Controllers\Admin\BannerController@create')->name('create-banner');
+        Route::post('/create', '\App\Http\Controllers\Admin\BannerController@store')->name('create-banner');
+    });
+    // END Route for transactions
    
 });
 
